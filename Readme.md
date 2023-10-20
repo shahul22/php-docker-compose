@@ -26,5 +26,4 @@ Clone me and build cool stuff. This sets up some minimal containers with Nginx, 
 - .env *Varios setting for our container (See -env.sample)*
 
 ## About
-By [Daniel Morales](https://daniel.uy)
-License: Released under the  [MIT license](https://github.com/danielm/uploader/blob/master/LICENSE.txt)
+Shahul Hameed
