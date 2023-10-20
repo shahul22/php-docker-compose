@@ -14,7 +14,7 @@ services:
     volumes:
       - ./build/mysqldb-8.0/seed:/docker-entrypoint-initdb.d
       - ./build/mysqldb-8.0/data:/var/lib/mysql
-      - ./logs/mysql-8.0:/var/log/mysql
+      - ./logs/mysqldb-8.0:/var/log/mysql
     restart: 'always'
     container_name: 'mysqldb-8.0'
   phpmyadmin:
@@ -26,7 +26,7 @@ services:
       - "9090:80"
     restart: 'always'
     container_name: 'phpmyadmin'
-  php-fpm-8.0:
+  php-fpm:
     build:
       context: ./build/php-fpm-8.0
     depends_on:
