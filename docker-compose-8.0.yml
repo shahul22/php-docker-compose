@@ -1,9 +1,9 @@
 version: '3'
 
 services:
-  mysqldb:
+  mysqldb-8.0:
     build:
-      context: ./build/mysqldb
+      context: ./build/mysqldb-8.0
     environment:
       - MYSQL_DATABASE=${DB_NAME}
       - MYSQL_USER=${DB_USER}
@@ -12,33 +12,33 @@ services:
     ports:
       - "${HOST_DB_PORT}:3306"
     volumes:
-      - ./build/mysqldb/seed:/docker-entrypoint-initdb.d
-      - ./build/mysqldb/data:/var/lib/mysql
-      - ./logs/mysql:/var/log/mysql
+      - ./build/mysqldb-8.0/seed:/docker-entrypoint-initdb.d
+      - ./build/mysqldb-8.0/data:/var/lib/mysql
+      - ./logs/mysql-8.0:/var/log/mysql
     restart: 'always'
-    container_name: 'mysqldb'
+    container_name: 'mysqldb-8.0'
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     environment:
-      - PMA_HOST=mysqldb
+      - PMA_HOST=mysqldb-8.0
       - PMA_ARBITRARY=1
     ports:
       - "9090:80"
     restart: 'always'
     container_name: 'phpmyadmin'
-  php-fpm:
+  php-fpm-8.0:
     build:
-      context: ./build/php-fpm
+      context: ./build/php-fpm-8.0
     depends_on:
-      - mysqldb
+      - mysqldb-8.0
     environment:
       - APP_ENV=${APP_ENV}
       - APP_SECRET=${APP_SECRET}
-      - DATABASE_URL=mysql://${DB_USER}:${DB_PASSWORD}@mysqldb:3306/${DB_NAME}
+      - DATABASE_URL=mysql://${DB_USER}:${DB_PASSWORD}@mysqldb-8.0:3306/${DB_NAME}
     volumes:
       - ./src:/var/www
     restart: 'always'
-    container_name: 'php-fpm'
+    container_name: 'php-fpm-8.0'
     user: ${HOST_USER}
   nginx:
     build:
@@ -50,7 +50,7 @@ services:
       - ./build/nginx/conf.d/:/etc/nginx/conf.d
       - ./logs/nginx:/var/log/nginx
     depends_on:
-      - php-fpm
+      - php-fpm-8.0
     ports:
       - "${HOST_HTTP_PORT}:80"
       - "${HOST_HTTPS_PORT}:443"
