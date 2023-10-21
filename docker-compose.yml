@@ -14,7 +14,7 @@ services:
     volumes:
       - ./build/mysqldb/seed:/docker-entrypoint-initdb.d
       - ./build/mysqldb/data:/var/lib/mysql
-      - ./logs/mysql:/var/log/mysql
+      - ./logs/mysqldb:/var/log/mysql
     restart: 'always'
     container_name: 'mysqldb'
   phpmyadmin:
