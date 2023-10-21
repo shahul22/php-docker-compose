@@ -1,4 +1,4 @@
 -- Create a read-only user
 CREATE USER 'readonly-user'@'%' IDENTIFIED BY 'readonly-password';
-GRANT SELECT ON example-db.* TO 'readonly-user'@'%';
+GRANT SELECT ON docker.* TO 'readonly-user'@'%';
 FLUSH PRIVILEGES;
