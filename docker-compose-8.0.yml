@@ -50,7 +50,7 @@ services:
       - ./build/nginx/conf.d/:/etc/nginx/conf.d
       - ./logs/nginx:/var/log/nginx
     depends_on:
-      - php-fpm-8.0
+      - php-fpm
     ports:
       - "${HOST_HTTP_PORT}:80"
       - "${HOST_HTTPS_PORT}:443"
