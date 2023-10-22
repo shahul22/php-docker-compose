@@ -1,5 +1,2 @@
-FROM mysql:8.0
-
-CMD ["mysqld"]
-
+FROM mysql:5.7
 EXPOSE 3306
