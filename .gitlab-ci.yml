@@ -1,0 +1,31 @@
+stages:
+  - deploy
+
+deploy_dev:
+  stage: deploy
+  script:
+    - sh build/scripts/dev_deploy_script.sh
+
+deploy_test:
+  stage: deploy
+  script:
+    - sh build/scripts/test_deploy_script.sh
+
+deploy_stage:
+  stage: deploy
+  script:
+    - sh build/scripts/stage_deploy_script.sh
+  when: manual
+
+deploy_prod:
+  stage: deploy
+  script:
+    - sh build/scripts/prod_deploy_script.sh
+  when: manual
+
+  only:
+    - main
+variables:
+  SSH_USER: "$SSH_USER"
+  SSH_HOST: "$SSH_HOST"
+  SSH_PASSWORD: "$SSH_PASSWORD"
